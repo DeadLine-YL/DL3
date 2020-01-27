@@ -1,30 +1,8 @@
 import pygame
-import os
 import random
 
 
 z = 0
-
-
-def load_image(name, colorkey=None):
-    fullname = os.path.join('data', name)
-    image = pygame.image.load(fullname)
-    if colorkey is not None:
-        if colorkey == -1:
-            colorkey = image.get_at((0, 0))
-        image.set_colorkey(colorkey)
-    return image
-
-
-class Mountain(pygame.sprite.Sprite):
-    image = load_image("pushka.png")
-
-    def __init__(self):
-        super().__init__(all_sprites)
-        self.image = Mountain.image
-        self.rect = self.image.get_rect()
-        self.mask = pygame.mask.from_surface(self.image)
-        self.rect.bottom = height
 
 
 class Ball(pygame.sprite.Sprite):
@@ -129,9 +107,9 @@ class Cube(pygame.sprite.Sprite):
             Border(100 + self.x, 5 + self.hod - self.hod1, 100 + self.x, 105 + self.hod - self.hod1)
             Border(self.x, 105 + self.hod - self.hod1, 100 + self.x, 105 + self.hod - self.hod1)
         else:
-            self.rect = pygame.Rect(1000, 0, 100, 100)
             all_sprites.remove(self)
             self.n = 1
+
 
 
 all_sprites = pygame.sprite.Group()
@@ -237,8 +215,8 @@ while running:
         screen.blit(text2, (text2_x, text2_y))
     text_x = width / 2 - width / 5
     text_y = height / 2
-    text_w = text.get_width()
-    text_h = text.get_height()
+    text_w = int(text.get_width())
+    text_h = int(text.get_height())
     screen.blit(text, (text_x, text_y))
     if col2 < 30:
         all_sprites.update()
